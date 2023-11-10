@@ -1,36 +1,99 @@
-# CMS
+# Contacts Management Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+This is a simple Contacts Management Application built with Angular 17.0.0 and .NET Core 6.0.
 
-## Development server
+## Setup Instructions
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
 
-## Code scaffolding
+Before you begin, ensure you have the following tools installed:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Node.js](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli)
+- [.NET Core SDK](https://dotnet.microsoft.com/download)
 
-# Contact Management Application
+### Installation
 
-CRUD Operation For User Contacts
+1. Clone the repository:
 
-Steps To Setup:
+   ```bash
+   git clone https://github.com/InterraIT/ChiragContactApp.git
+   ```
 
-    1: clone the repo
-    2: open project directory
-    3: run npm i
-    4: run ng serve
+2. Install npm packages for the Angular app:
+
+   ```bash
+   cd contactmanagement
+   npm install
+   ```
+
+3. Restore NuGet packages for the .NET Core app:
+
+## How to Run the Application
+
+### Angular App
+
+1. Navigate to the `contactmanagement` directory:
+
+   ```bash
+   cd contactmanagement
+   ```
+
+2. Run the Angular development server:
+
+   ```bash
+   ng serve
+   ```
+
+3. Open your browser and navigate to `http://localhost:4200/` to access the Angular app.
+
+### .NET Core App
+
+1. Navigate to the project root directory:
+
+   ```bash
+   cd CMSAPI
+   ```
+
+2. Run the .NET Core application:
+
+   ```bash
+   dotnet run
+   ```
+
+3. Open your browser and navigate to `http://localhost:7123/` to access the .NET Core API.
+
+## Design Decisions and Application Structure
+
+### Angular App
+
+Bootstrap 5 Integration: The application leverages Bootstrap 5 to create a responsive and visually appealing layout. The use of Bootstrap ensures a consistent and user-friendly design across different parts of the application, contributing to a seamless user experience.
+
+ng-bootstrap for Enhanced Modals: To implement popups for adding and editing contacts, the application utilizes ng-bootstrap. This Angular-specific library provides Bootstrap components, particularly modals, seamlessly integrated into the Angular framework. This choice enhances the user experience when interacting with contact details.
+
+ngx-toastr for User Confirmation Messages: The application employs ngx-toastr as a service to display user confirmation messages. This library enhances user feedback by providing visually appealing and non-intrusive notifications for various actions within the application.
+
+Reactive Forms with Advanced Validation: The application utilizes Angular's reactive forms to manage user input systematically. Leveraging reactive forms brings powerful features, including built-in validation capabilities. This ensures that user-entered data adheres to specified criteria, resulting in a more streamlined and error-resistant user experience.
 
 
-Environments files consists of ApiUrl Which You can modify as per requirement
+### .NET Core App
 
-Detailed Feedback :
+- The .NET Core app follows a layered architecture with separate folders for controllers, services, Interfaces and models.
 
-    Home: Consists of List, Edit and Delete Contacts
-    Edit, Save and Delete is opened as a child component and user details are passed using the decorator and action is emitted. 
 
-    All Services consists of all the Api which are used 
+Certainly! Optimizing the performance of a .NET Core application involves several considerations.
 
-Backend : Simple MVC approach is followed for writing the Api
-    Json file is used as a mock DB
+Use Asynchronous Programming:
+
+Leverage asynchronous programming with async and await to avoid blocking threads and improve scalability. Asynchronous code allows the application to continue processing other tasks while waiting for I/O operations to complete.
+Utilize asynchronous versions of I/O-bound operations, such as database queries and HTTP requests.
+Optimize Database Access:
+
+Use an efficient ORM (Object-Relational Mapper) for database access, and ensure that queries are optimized. Entity Framework Core provides features like query caching and compiled queries to enhance performance.
+Consider indexing, denormalization, and database caching strategies based on the specific requirements of your application.
+
+Implement Caching Strategies:
+
+Implement caching mechanisms to store frequently accessed data in memory, reducing the need to regenerate or fetch the data from its original source.
+Use distributed caching for web farms or microservices architectures. ASP.NET Core provides support for various caching providers.
 
