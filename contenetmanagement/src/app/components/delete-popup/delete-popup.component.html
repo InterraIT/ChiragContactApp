@@ -1,0 +1,20 @@
+<div class="model-inner-content-wrapper p-2">
+    <div class="d-flex justify-content-end model-close-icon" (click)="activeModal.dismiss('click')"> 
+        <img src="assets/img/popup-close.svg" alt="Popup Close" />
+    </div>
+    <div class="model-inner-content">
+        <div class="hs-business-doctype-list-group">
+            <div class="modal-header no-bg">
+                <div class="hs-popup-title">
+                    <h4>
+                        Are You Sure You Want To Delete {{user.firstName}}
+                    </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <button class="btn btn-light">Cancel</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

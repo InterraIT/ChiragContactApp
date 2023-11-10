@@ -1,0 +1,21 @@
+.arrow-down,
+.arrow-up,
+.arrow-down-disabled {
+  background: transparent url("/assets/img/sorting-arrow.png") no-repeat center
+    center/auto;
+  cursor: pointer;
+  display: inline-block;
+  height: 17px;
+  vertical-align: middle;
+  width: 17px;
+}
+
+.arrow-up {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.arrow-down-disabled {
+  opacity: 0;
+}
