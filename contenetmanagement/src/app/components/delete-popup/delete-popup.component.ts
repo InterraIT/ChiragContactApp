@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from '../../interfaces/Users';
 @Component({
   selector: 'app-delete-popup',
   standalone: true,
@@ -10,9 +11,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DeletePopupComponent {
   @Input() public user: any;
+
+  @Output() deleteUser = new EventEmitter<User>();
   constructor(public activeModal: NgbActiveModal) {
-    console.log(this.user)
   }
   ngOnInit(): void {
+
+  }
+
+  deleteAction(user:User){
+    this.deleteUser.emit(user);
+    this.activeModal.dismiss("clicked");
   }
 }

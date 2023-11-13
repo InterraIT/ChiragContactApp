@@ -7,13 +7,24 @@
             <div class="modal-header no-bg">
                 <div class="hs-popup-title">
                     <h4>
-                        Are You Sure You Want To Delete {{user.firstName}}
+                        Are You Sure You Want To Delete
                     </h4>
                 </div>
             </div>
             <div class="modal-body">
-                <button class="btn btn-light">Cancel</button>
-                <button class="btn btn-danger">Delete</button>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Name : {{user.firstName}} {{user.lastName}}</p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <button class="btn btn-light" (click)="activeModal.dismiss('click')">Cancel</button>
+                        <button class="btn btn-danger" (click)="deleteAction(user)">Delete</button>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

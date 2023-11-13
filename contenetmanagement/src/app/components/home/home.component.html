@@ -5,10 +5,17 @@
 
   <div class="row">
     <div class="d-flex justify-content-between">
-      <button class="btn btn-success">New</button>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <button class="btn btn-success" (click)="addUser()">New</button>
+      <form class="d-flex" [formGroup]="searchForm">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          formControlName="searchTxt"
+          (ngModelChange)="onSearch($event)"
+          placeholder="Search"
+        />
       </form>
     </div>
   </div>
@@ -35,23 +42,48 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let user of usersList">
-              <th scope="row">{{user.id}}</th>
-              <td>{{user.firstName}}</td>
-              <td>{{user.lastName}}</td>
-              <td>{{user.email}}</td>
+            <tr
+              *ngFor="
+                let user of dataListObs
+                  | async
+                  | paginate
+                    : {
+                        id: 'userContact',
+                        itemsPerPage: pageSize,
+                        currentPage: currentPageNumber,
+                        totalItems: totalNumberOfrecords
+                      }
+              "
+            >
+              <th scope="row">{{ user.id }}</th>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
               <td>
-                <button class="btn btn-primary">Edit</button>
+                <button (click)="editUser(user)" class="btn btn-primary">
+                  Edit
+                </button>
               </td>
               <td>
-                <button (click)="deleteUser(user)" class="btn btn-danger">Delete</button>
+                <button (click)="deleteUser(user)" class="btn btn-danger">
+                  Delete
+                </button>
               </td>
+            </tr>
+
+            <tr *ngIf="numberOfrecords == 0">
+              No data available
             </tr>
           </tbody>
         </table>
 
         <div class="row mt-5">
-            <app-paginator></app-paginator>
+          <div class="d-flex justify-content-center">
+            <pagination-controls
+              id="userContact"
+              (pageChange)="getDatalist($event)"
+            ></pagination-controls>
+          </div>
         </div>
       </div>
     </div>
