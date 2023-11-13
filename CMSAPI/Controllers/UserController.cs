@@ -2,6 +2,7 @@
 using CMS_API.Modal;
 using CMS_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 
 namespace CMS_API.Controllers
@@ -18,13 +19,22 @@ namespace CMS_API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUser(int pageNumber, int pageSize, string? searchTerm="" )
         {
             try
             {
                 var users = await _userService.GetUsers();
-                
-                return Ok(users);
+                var filteredUsers = string.IsNullOrWhiteSpace(searchTerm)
+                ? users
+                : users.Where(u => u.firstName.ToLower().Contains(searchTerm.ToLower()) || u.lastName.ToLower().Contains(searchTerm.ToLower()) || u.email.ToLower().Contains(searchTerm.ToLower())).ToList();
+
+                var totalUsers = filteredUsers.Count;
+                var totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+                var paginatedUsers = filteredUsers.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+
+
+                return Ok(new { users = paginatedUsers, totalCount = totalUsers, currentPageNumber = pageNumber });
             }
             catch (Exception ex)
             {
